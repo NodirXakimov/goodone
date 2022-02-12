@@ -13,6 +13,8 @@ class Warehouse extends Model
 
     public function materials()
     {
-        return $this->hasMany(Material::class);
+        return $this->hasManyThrough(
+            Material::class
+        );
     }
 }
