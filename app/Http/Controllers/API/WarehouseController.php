@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Material;
-use Illuminate\Support\Facades\DB;
 
 class WarehouseController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Material[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Http\Response
      */
     public function index()
     {
@@ -21,7 +21,7 @@ class WarehouseController extends Controller
     /**
      * Getting list of available materials for product.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Support\Collection
      */
     public function getMaterials(Request $request)
     {
@@ -37,6 +37,9 @@ class WarehouseController extends Controller
 //            ->map(function($result){
 //                return $result->name;
 //            })
+            ->groupBy(function($result){
+                return $result->name;
+            })
             ;
     }
 }
