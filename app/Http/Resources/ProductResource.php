@@ -3,9 +3,8 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Auth;
 
-class MaterialResource extends JsonResource
+class ProductResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,9 +15,9 @@ class MaterialResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'quantity' => $this->pivot->quantity,
+            'product_name' => $this->name,
+            'product_qty' => $this->id,
+            'materials' => MaterialResource::collection($this->materials),
 //            'created_at' => $this->created_at,
 //            'updated_at' => $this->updated_at,
         ];

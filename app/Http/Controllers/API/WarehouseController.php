@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Resources\MaterialCollection;
+use App\Http\Resources\ProductCollection;
+use App\Http\Resources\ProductResource;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\MaterialResource;
 use App\Http\Controllers\Controller;
@@ -50,9 +52,9 @@ class WarehouseController extends Controller
 //        return $result;
 
 
-
-        return new MaterialCollection(Product::whereIn('id', $products_array)->get());
-//        return Product::whereIn('id', $products_array)->get();
+//        return $request->data;
+        return new ProductCollection(Product::with('materials')->whereIn('id', $products_array)->get());
+//        return ProductResource::collection(Product::all());
 
 
 
